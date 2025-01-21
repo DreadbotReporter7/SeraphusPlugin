@@ -67,12 +67,15 @@ export default class MyPlugin extends Plugin {
 
 		// Grey text command
 		this.addCommand({
-			id: 'insert-light-grey-text',
-			name: 'Insert Light Grey Text After Cursor',
-			callback: () => {
-				this.insertTextAfterCursor();
+			id: 'insert-grey-text',
+			name: 'Insert grey text after cursor',
+			editorCallback: (editor: Editor, view: MarkdownView) => {
+			  // Insert text at the cursor
+			  const cursor = editor.getCursor();
+			  const greyText = '<span style="color: lightgrey;">grey text</span>';
+			  editor.replaceRange(greyText, cursor);
 			}
-		});
+		  });
 		
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
@@ -88,6 +91,7 @@ export default class MyPlugin extends Plugin {
 		this.registerInterval(window.setInterval(() => console.log('setInterval'), 5 * 60 * 1000));
 	}
 
+	/*
 	// This function inserts text right after the cursor position in the active markdown editor
 	insertTextAfterCursor() {
 		// Get the current active Markdown view (editor)
@@ -107,6 +111,7 @@ export default class MyPlugin extends Plugin {
 			editor.replaceRange(textToInsert, cursorPos);
 		}
 	}
+	*/
 
 	onunload() {
 
